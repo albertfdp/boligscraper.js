@@ -1,0 +1,22 @@
+{
+  "name": "boligscraper.js",
+  "version": "1.0.0",
+  "description": "Scrapping tool in JS for boligportal.dk",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js"
+  },
+  "keywords": [
+    "boligportal"
+  ],
+  "author": "Albert Fernandez",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.8.1",
+    "infinite-loop": "^0.2.2",
+    "lodash": "^3.10.1",
+    "nodemailer": "^1.4.0",
+    "request": "^2.60.0",
+    "superagent": "^1.3.0"
+  }
+}
