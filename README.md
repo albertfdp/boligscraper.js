@@ -1,4 +1,4 @@
-Scraping tool in JavaScript for [boligportal.dk](https://boligportal.dk)
+Scraping tool in JavaScript for [boligportal.dk](https://boligportal.dk). Ported from C# version at https://github.com/srn/boligscraper.cs
 
 # Usage
 
