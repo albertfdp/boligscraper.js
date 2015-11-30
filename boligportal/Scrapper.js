@@ -20,6 +20,7 @@ export default class Scrapper {
     this.boligProperties = [];
     this.email = opts.email;
     this.dry = opts.dry;
+    this.firstRun = true;
   }
 
   scrap() {
@@ -52,10 +53,16 @@ export default class Scrapper {
               if (this.dry) {
                   console.log(`[DRY] ${new Date()}: ${property.headline} - ${property.economy.rent}DKK : ${property.location.street}, ${property.location.zipcode}`);
               } else {
-                this.sendEmail(property);
+                if (!this.firstRun) {
+                  this.sendEmail(property);
+                } 
               }
             }
           });
+        if (this.firstRun) {
+          console.log('First run passed and fetched ' + this.boligProperties.length + ' properties');
+          this.firstRun = false;
+        }
       });
   }
 
