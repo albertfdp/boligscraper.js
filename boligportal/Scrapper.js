@@ -60,7 +60,12 @@ export default class Scrapper {
             }
           });
         if (this.firstRun) {
-          console.log('First run passed and fetched ' + this.boligProperties.length + ' properties');
+          let total = response.properties
+                        .map((property) => {
+                          return this.deserialize(property)
+                        });
+
+          console.log('First run fetched ' + total.length + " properties, but only " + this.boligProperties.length + ' are not reserved yet!');
           this.firstRun = false;
         }
       });
