@@ -117,7 +117,7 @@ export default class Scrapper {
       boligTypeArr: opts.types, // apartment types
       lejeLaendgeArr: ['4'], // rent length
       page: "1",
-      limit: "15",
+      limit: "50",
       sortCol: "3",
       sortDes: "1",
       visOnSiteBolig: "", // show on site appartment
