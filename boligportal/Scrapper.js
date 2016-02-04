@@ -20,6 +20,7 @@ export default class Scrapper {
     this.boligProperties = [];
     this.email = opts.email;
     this.dry = opts.dry;
+    this.firstRun = true;
   }
 
   scrap() {
@@ -47,15 +48,26 @@ export default class Scrapper {
             return this.deserialize(property)
           })
           .forEach((property) => {
-            if (!_.any(this.boligProperties, _.matches(property))) {
-              this.boligProperties.push(property);
+            if (!_.any(this.boligProperties, _.matches(property.id)) && !property.reserved) {
+              this.boligProperties.push(property.id);
               if (this.dry) {
                   console.log(`[DRY] ${new Date()}: ${property.headline} - ${property.economy.rent}DKK : ${property.location.street}, ${property.location.zipcode}`);
               } else {
-                this.sendEmail(property);
+                if (!this.firstRun) {
+                  this.sendEmail(property);
+                } 
               }
             }
           });
+        if (this.firstRun) {
+          let total = response.properties
+                        .map((property) => {
+                          return this.deserialize(property)
+                        });
+
+          console.log('First run fetched ' + total.length + " properties, but only " + this.boligProperties.length + ' are not reserved yet!');
+          this.firstRun = false;
+        }
       });
   }
 
@@ -110,7 +122,7 @@ export default class Scrapper {
       boligTypeArr: opts.types, // apartment types
       lejeLaendgeArr: ['4'], // rent length
       page: "1",
-      limit: "15",
+      limit: "50",
       sortCol: "3",
       sortDes: "1",
       visOnSiteBolig: "", // show on site appartment
