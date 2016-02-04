@@ -48,8 +48,8 @@ export default class Scrapper {
             return this.deserialize(property)
           })
           .forEach((property) => {
-            if (!_.any(this.boligProperties, _.matches(property)) && !property.reserved) {
-              this.boligProperties.push(property);
+            if (!_.any(this.boligProperties, _.matches(property.id)) && !property.reserved) {
+              this.boligProperties.push(property.id);
               if (this.dry) {
                   console.log(`[DRY] ${new Date()}: ${property.headline} - ${property.economy.rent}DKK : ${property.location.street}, ${property.location.zipcode}`);
               } else {
